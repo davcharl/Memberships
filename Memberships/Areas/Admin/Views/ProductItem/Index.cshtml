@@ -1,0 +1,42 @@
+﻿@using Memberships.Areas.Admin.Models
+@model IEnumerable<Memberships.Areas.Admin.Models.ProductItemModel>
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.Partial("_CreateButtonPartial")
+</p>
+<table class="table table-striped table-condensed">
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemTitle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var productitem in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelProduct => productitem.ProductTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => productitem.ItemTitle)
+    </td>
+
+    <td>
+        @Html.Partial("_TableButtonsPartial", 
+                    new SmallButtonModel {  ProductId = productitem.ProductId, ItemId = productitem.ItemId} )
+    </td>
+</tr>
+}
+
+</table>

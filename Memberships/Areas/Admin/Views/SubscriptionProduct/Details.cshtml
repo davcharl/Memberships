@@ -1,0 +1,26 @@
+﻿@using Memberships.Areas.Admin.Models
+@model Memberships.Areas.Admin.Models.SubscriptionProductModel
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product Item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(m => m.SubscriptionTitle)</dt>
+        <dd>@Html.DisplayFor(m => m.SubscriptionTitle)</dd>
+        <dt>@Html.DisplayNameFor(m => m.ProductTitle)</dt>
+        <dd>@Html.DisplayFor(m => m.ProductTitle)</dd>
+    </dl>
+    <hr />
+</div>
+<p>
+    @Html.Partial("_EditButtonDetailsPartial",
+            new EditButtonModel { SubscriptionId = Model.SubscriptionId, ProductId = Model.ProductId })
+    @Html.Partial("_BackToListButtonPartial")
+</p>

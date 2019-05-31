@@ -22,21 +22,22 @@ namespace Memberships.Entities
         [MaxLength(1024)]
         public string Url { get; set; }
         [MaxLength(1024)]
+        [DisplayName("Image Url")]
         public string ImageUrl { get; set; }
         [AllowHtml]
         public string Html { get; set; }
         [DefaultValue(0)]
+        [DisplayName("Wait Days")]
         public int WaitDays { get; set; }
         public string HtmlShort
         {
             get { return Html == null || Html.Length < 50 ? Html : Html.Substring(0, 50); }
         }
-
         public int ProductId { get; set; }
         public int ItemTypeId { get; set; }
         public int SectionId { get; set; }
         public int PartId { get; set; }
-        public int IsFree { get; set; }
+        public bool IsFree { get; set; }
 
         // For lazy loading, do not use enum or list; use ICollection
         // Collections will not be reflected in the Database

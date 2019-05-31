@@ -16,17 +16,20 @@ namespace Memberships.Areas.Admin.Models
         public int? ItemId { get; set; }
         public int? ProductId { get; set; }
         public int? SubscriptionId { get; set; }
+        public string UserId { get; set; }
         public string ActionParameters {
             get {
                 var param = new StringBuilder("?");
                 if(Id != null && Id > 0 )
                     param.Append(String.Format("{0}={1}&", "id", Id));
-                if (ItemId != null && Id > 0)
+                if (ItemId != null && ItemId > 0)
                     param.Append(String.Format("{0}={1}&", "itemId", ItemId));
-                if (Id != null && Id > 0)
+                if (ProductId != null && ProductId > 0)
                     param.Append(String.Format("{0}={1}&", "productId", ProductId));
-                if (Id != null && Id > 0)
+                if (SubscriptionId != null && SubscriptionId > 0)
                     param.Append(String.Format("{0}={1}&", "subscriptionId", SubscriptionId));
+                if (UserId != null && !UserId.Equals(String.Empty))
+                    param.Append(String.Format("{0}={1}&", "userId", UserId));
 
                 return param.ToString().Substring(0, param.Length - 1);
             }

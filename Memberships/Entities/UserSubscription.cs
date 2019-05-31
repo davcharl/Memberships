@@ -7,18 +7,17 @@ using System.Web;
 
 namespace Memberships.Entities
 {
-    [Table("SubscriptionProduct")]
-    public class SubscriptionProduct
+    [Table("UserSubscription")]
+    public class UserSubscription
     {
         [Required]
         [Key, Column(Order = 1)]
-        public int ProductId { get; set; }
+        public int SubscriptionId { get; set; }
         [Required]
         [Key, Column(Order = 2)]
-        public int SubscriptionId { get; set; }
-        [NotMapped]
-        public int OldProductId { get; set; }
-        [NotMapped]
-        public int OldSubscriptionId { get; set; }
+        [MaxLength(128)]
+        public string UserId { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }
