@@ -723,11 +723,37 @@ namespace Memberships.Controllers
                             EndDate = DateTime.MaxValue
                         });
                     await db.SaveChangesAsync();
-                    RedirectToAction("Subscriptions", "Account", new { userId = model.UserId });
+                    
                 }
             }
             catch { }
-            return View(model);
+            return RedirectToAction("Subscriptions", "Account", new { userId = model.UserId });
+        }
+
+        // POST: Account/RemoveUserSubscription
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> RemoveUserSubscription(int subscriptionId, string userId)
+        {
+            try
+            {
+                if (userId == null || userId.Equals(String.Empty) || subscriptionId <= 0)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                if (ModelState.IsValid)
+                {
+                    var db = new ApplicationDbContext();
+                    var subscriptions = db.UserSubscriptions.Where(
+                        us => us.UserId.Equals(userId) &&
+                        us.SubscriptionId.Equals(subscriptionId));
+                    db.UserSubscriptions.RemoveRange(subscriptions);
+                    await db.SaveChangesAsync();
+                }
+            }
+            catch { }
+            return  RedirectToAction("Subscriptions", "Account", new { userId = userId });
         }
 
     }
